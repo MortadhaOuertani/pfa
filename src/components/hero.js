@@ -24,16 +24,8 @@ const Hero = () => {
         <HeroVideo autoPlay loop muted src={video} type="video/mp4" />
       </HeroBg>
       <HeroContent>
-        <HeroH1>Making money never been easier</HeroH1>
-        <HeroP>
-          Signup and become A Milionaire today just for 100$ and live your
-          idieal life
-        </HeroP>
-        <HeroBtnWraper>
-          <Button to="signup" primary="true" onMouseEnter={onHover} onMouseLeave={onHover}>
-            Get Started {hover ? <ArrowForward /> : <ArrowRight />}
-          </Button>
-        </HeroBtnWraper>
+        <HeroH1> Start a life full of adventure and excitement</HeroH1>
+        <HeroP>Chekout new interesting places to visit</HeroP>
       </HeroContent>
     </HeroContainer>
   );

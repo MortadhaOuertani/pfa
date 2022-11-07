@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Button } from "../buttonElement";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { LoginAction, Registration } from "../../redux/action/authactions";
 import "../css/more.scss";
+import FileBase64 from "react-file-base64";
 import {
   ArrowForward,
   ArrowRight,
@@ -20,6 +19,7 @@ import { AddProfile } from "../../redux/action/profileactions";
 const MoreInfo = () => {
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState("");
+  const [currentFile, setCurrentFile] = useState(undefined);
   const [form, setForm] = useState({});
   const dispatch = useDispatch();
   const Navigate = useNavigate();
@@ -28,6 +28,14 @@ const MoreInfo = () => {
     e.preventDefault();
     dispatch(AddProfile(form, setShow, setMessage, Navigate));
   };
+
+  const selectFile = (image) => {
+    setForm({
+      ...form,
+      img: image.base64,
+    });
+  };
+
   const onChangeHandler = (e) => {
     setForm({
       ...form,
@@ -35,20 +43,28 @@ const MoreInfo = () => {
     });
   };
 
+  
   return (
     <HeroContainer>
       <HeroBg>
         <HeroVideo autoPlay loop muted src={moreinfovideo} type="video/mp4" />
       </HeroBg>
       <HeroContent>
-        <form action="#" onSubmit={onSubmit}>
+        <form action="#" onSubmit={onSubmit} encType="multipart/form-data">
           <p>Share your thoughts on a vacation</p>
+          <input
+            name="title"
+            required
+            type="text"
+            onChange={onChangeHandler}
+            placeholder="title"
+          /><br/>
           <input
             name="city"
             required
             type="text"
             onChange={onChangeHandler}
-            placeholder="city"
+            placeholder="city name"
           />
           <br />
           {errors.city && (
@@ -64,12 +80,12 @@ const MoreInfo = () => {
             </div>
           )}
           <input
-           style={{width:"80%"}}
+            style={{ width: "80%" }}
             type="textarea"
             required
             name="bio"
             onChange={onChangeHandler}
-            placeholder="thoughts"
+            placeholder="what are you'r thoughts on the city"
           />
           <br />
           {errors.bio && (
@@ -83,11 +99,12 @@ const MoreInfo = () => {
               {errors.password}
             </div>
           )}
-          <input style={{width:"90%"}} type="text" name="recomended" placeholder=" why recomend this place" onChange={onChangeHandler}/>          
-          <br />              
+          <FileBase64 multiples={false} onDone={selectFile}/><br/>
+         
           <button type="submit" onChange={onChangeHandler} value="Sign in">
             Share
           </button>
+          <p>{}</p>
           <br />
           <Link to="/blog">Go back To The Forum!</Link>
         </form>

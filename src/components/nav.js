@@ -45,7 +45,7 @@ const LogoutHandler=()=>{
           <Navmenu style={{marginTop:"50px"}}>
             <Menuitems>
               <NavLogo onClick={ToggleHome} to="/">
-                Dice n Win
+              Dreamscape Direct
               </NavLogo>
             </Menuitems>
             <Menuitems>
@@ -61,43 +61,14 @@ const LogoutHandler=()=>{
           </MobileIcon>
           <Navmenu>
             <Menuitems>
-              <Navlinks
-                to="about"
-                smooth={true}
-                duration={500}
-                spy={true}
-                exact="true"
-                offset={-80}
-              >
-                about
-              </Navlinks>
+           <Rolebutton   to="/blog"> Blog</Rolebutton>              
+              
             </Menuitems>
             <Menuitems>
-              <Navlinks
-                to="discover"
-                smooth={true}
-                duration={500}
-                spy={true}
-                exact="true"
-                offset={-80}
-              >
-                discover
-              </Navlinks>
+            <Rolebutton   to="/more">Post</Rolebutton>              
+
             </Menuitems>
-            <Menuitems>
-              <Navlinks
-                to="services"
-                smooth={true}
-                duration={500}
-                spy={true}
-                exact="true"
-                offset={-80}
-              >
-                services
-              </Navlinks>
-            </Menuitems>
-            <Menuitems>
-            </Menuitems>
+          
           </Navmenu>
          {
           !user.isConnected?(<> <NavBtn>

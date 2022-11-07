@@ -2,41 +2,38 @@ import React, { useEffect, useState } from "react";
 import Card from "../card";
 import Navbarloggedin from "../navbarLoggedin";
 import "../css/blog.css";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { GetProfiles } from "../../redux/action/profileactions";
+import Sidebar from "../sidebar";
 const Blogs = ({ user }) => {
-  const dispatch= useDispatch()
-  const profiles = useSelector(state=>state.profiles)
+  const dispatch = useDispatch();
+
+  const profiles = useSelector((state) => state.profiles);
+  const profile = profiles.profiles;
   const [isOpen, setisOpen] = useState(false);
-  const [show, setShow] = useState([]);
   const toggle = () => {
     setisOpen(!isOpen);
   };
-  useEffect(async ()=>{
-    await dispatch(GetProfiles())
-    setShow(profiles.profiles)
-   },[])
-  
+  useEffect(async () => {
+    await dispatch(GetProfiles());
+  }, []);
+
   return (
-    <>
+    <div className="body">
       <Navbarloggedin user={user} toggle={toggle} />
-      <div className="page-container">
-        <div className="link-wrapper">
-          <Link className="link" to="createcard">
-            Talk about your experience
-          </Link>
-        </div>
-        <div style={{height:"100vh",width:"100vh"}} className="card-group">
-        {
-                        show.map(({_id, user, bio, city})=>(
-                          <Card style={{zIndex:"999999"}} className="card" _id={_id} user={user} bio={bio} city={city}/>
-                        ))
-                      }
-        
-        </div>
-      </div>
-    </>
+      {profile.map(({_id,img, title, bio, user, city }) => (
+        <Card
+          key="s"
+          className="s"
+          user={user}
+          title={title}
+          img={img}
+          id={_id}
+          bio={bio}
+          city={city}
+        />
+      ))}
+    </div>
   );
 };
 

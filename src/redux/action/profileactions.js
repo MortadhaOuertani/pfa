@@ -2,10 +2,11 @@ import axios from 'axios'
 import config from '../../util/config';
 import { ERRORS, SET_PROFILE, SET_PROFILES, DELETE_PROFILE } from '../type';
 
-export const AddProfile = (form, setShow, setMessage)=>dispatch=>{
+export const AddProfile = (form, setShow, setMessage,Navigate)=>dispatch=>{
     axios
-      .post("http://localhost:3700/api/profile", form)
+      .post("http://localhost:3700/api/profile",form , config(localStorage.getItem('jwt')))
       .then(res => {
+        Navigate("/blog")
         setShow(true)
         setMessage("User added with success")
         dispatch({
@@ -15,7 +16,7 @@ export const AddProfile = (form, setShow, setMessage)=>dispatch=>{
         setTimeout(() => {
             setShow(false)
         }, 4000);
-      })
+    })
       .catch(err => {
           dispatch({
               type: ERRORS,
@@ -26,7 +27,7 @@ export const AddProfile = (form, setShow, setMessage)=>dispatch=>{
 
 export const GetProfile = ()=>dispatch=>{
     axios
-      .get("http://localhost:3700/api/profile")
+      .get("http://localhost:3700/api/profile",)
       .then(res => {
           dispatch({
               type: SET_PROFILE,
@@ -44,7 +45,7 @@ export const GetProfile = ()=>dispatch=>{
 export const GetProfiles = ()=>dispatch=>{
    console.log(localStorage.getItem('jwt'))
     axios
-      .get("http://localhost:3700/api/profiles",config(localStorage.getItem('jwt')))
+      .get("http://localhost:3700/api/profiles")
       .then(res => {
         console.log(res.data)
           dispatch({
@@ -65,7 +66,7 @@ export const GetProfiles = ()=>dispatch=>{
 export const DeleteProfile = (id)=>dispatch=>{
    if(window.confirm("are you sure to delete this user?")){
     axios
-    .delete(`http://localhost:3700/api/admin/${id}`)
+    .delete(`http://localhost:3700/api/admin/${id}`,config(localStorage.getItem('jwt')))
     .then(res => {
         dispatch({
             type: DELETE_PROFILE,

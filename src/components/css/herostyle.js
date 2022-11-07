@@ -48,10 +48,6 @@ export const HeroContent = styled.div`
     flex-direction:column;
     align-items:center;
     position:absolute;
-@media screen all (max-width:768px){
-    flex-direction:row;
-    
-}
 `
 export const HeroH1 = styled.h1`
     color:white;

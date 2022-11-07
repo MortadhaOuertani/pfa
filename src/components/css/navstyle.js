@@ -85,6 +85,19 @@ export const Navlinks = styled(LinkS)`
 
 }
 `
+
+export const BtnLink=styled(LinkR)`
+
+`
+export const Btn = styled.button`
+margin-top: 20px;
+color: white;
+border: none;
+background-color: black;
+&:hover{
+    background-color: inherit;
+}
+`
 export const NavBtn = styled.nav`
     display:flex;
     align-items:center;
@@ -115,12 +128,19 @@ text-decoration:none;
 }
 `
 export const Rolebutton = styled(LinkR)`
- text-decoration: none;
- color:white;
- margin-left: 20px;
- align-items:center;
-font-size:1rem;
+color:white;
+    display:flex;
+    align-items:center;
+    text-decoration:none;
+    padding:0 1rem;
+    height:100%;
+    cursor:pointer;
 &:hover{
-    color:white;
+    color:#01bf71;
+}
+&:active{
+    border-bottom: 3px solid #01bf71;
+    
+
 }
 `

@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginAction } from "../redux/action/authactions";
-import { Errordiv } from "./css/register";
-import "./css/signin.scss";
+import "./css/signin.css";
 const Signin = () => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
@@ -44,7 +43,7 @@ const Signin = () => {
           {errors.password && (
             <div style={{marginTop:"-20px",color:"#f70031",fontWeight:"600"}}>{errors.password}</div>
           )}
-          <button type="submit" onChange={onChangeHandler} value="Sign in">
+            <button type="submit" onChange={onChangeHandler} value="Sign in">
             Sign in
           </button>
           <br />

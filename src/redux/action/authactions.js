@@ -9,7 +9,6 @@ export const Registration = (form,Navigate)=>dispatch=>{
     axios.post('http://localhost:3700/api/register',form)
     .then(res=>{
         Navigate('/signin')
-        
     })
     .catch(err=>{
         dispatch({
@@ -33,6 +32,20 @@ export const LoginAction = (form, navigate)=>dispatch=>{
         })
     })
 }
+export const getuser = (form)=>dispatch=>{
+    axios.post('http://localhost:3700/api/login', form) 
+    .then(res=>{
+      const {token} = res.data
+      const decode = jwt_decode(token)
+      dispatch(setUser(decode))
+    })
+    .catch(err=>{
+        dispatch({
+            type: ERRORS,
+            payload: err.response.data
+        })
+    })
+}
 export const Logout=()=>dispatch=>{
     localStorage.removeItem('jwt')
 dispatch({
@@ -40,7 +53,6 @@ dispatch({
     payload: {}
 }) 
 }
-
 export const setUser=(decode)=>({
     type:SET_USER,
     payload:decode,

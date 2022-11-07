@@ -1,18 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Registration } from "../redux/action/authactions";
-import {
-  Form,
-  FormLabel,
-  Formbutton,
-  Formcontent,
-  Formh,
-  Forminput,
-  Formwrap,
-  Icons,
-  Signincontainer,
-  Errordiv,
-} from "./css/register";
 import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {

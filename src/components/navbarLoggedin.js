@@ -9,7 +9,11 @@ import {
   Navmenu,
   NavBtn,
   NavBtnLink,
-  Rolebutton
+  Rolebutton,
+  Btn,
+  BtnLink,
+  Menuitemst,
+  NavLogoM,
 } from "./css/navbarLoggedin";
 import { FaBars } from "react-icons/fa";
 import { animateScroll as Scroll } from "react-scroll/modules";
@@ -29,40 +33,57 @@ const Navbarloggedin = ({ toggle, user }) => {
   const ToggleHome = () => {
     Scroll.scrollToTop();
   };
-const dispatch=useDispatch()
-const LogoutHandler=()=>{
-  dispatch(Logout())
-}
+  const dispatch = useDispatch();
+  const LogoutHandler = () => {
+    dispatch(Logout());
+  };
 
   return (
     <>
       <Navbar invis={invis}>
         <NavContainer>
-          <Navmenu style={{marginTop:"50px"}}>
+        <NavLogoM onClick={ToggleHome} to="/">
+                Dreamscape Direct
+              </NavLogoM>
+          <Navmenu style={{ marginTop: "50px" }}>
             <Menuitems>
               <NavLogo onClick={ToggleHome} to="/">
-                Dice n Win
+                Dreamscape Direct
               </NavLogo>
+              
             </Menuitems>
             <Menuitems>
-            {
-            user.role==="ADMIN"?(<Rolebutton to="#">Admin</Rolebutton>
-            ):(""
-            )
-            }
+              {user.role == "ADMIN" ? (
+                <Rolebutton to="#">Admin</Rolebutton>
+              ) : (
+                ""
+              )}
             </Menuitems>
           </Navmenu>
+          <Navmenu>
+            <Menuitemst>
+            <BtnLink to="/more">Post</BtnLink>              
+            </Menuitemst>
+            <Menuitemst>
+            <BtnLink to="/blog">blog</BtnLink>              
+            </Menuitemst>
+          </Navmenu>
           <MobileIcon onClick={toggle}>
-            <FaBars size={25} />
           </MobileIcon>
-         {
-          !user.isConnected?(<> <NavBtn>
-            <NavBtnLink to="/signin">Sign In</NavBtnLink>
-          </NavBtn></>):<NavBtn>
-            <NavBtnLink to="/" onClick={LogoutHandler}>Logout</NavBtnLink>
-          </NavBtn>
-         }
-          
+          {!user.isConnected ? (
+            <>
+              {" "}
+              <NavBtn>
+                <NavBtnLink to="/signin">Sign In</NavBtnLink>
+              </NavBtn>
+            </>
+          ) : (
+            <NavBtn>
+              <NavBtnLink to="/" onClick={LogoutHandler}>
+                Logout
+              </NavBtnLink>
+            </NavBtn>
+          )}
         </NavContainer>
       </Navbar>
     </>
